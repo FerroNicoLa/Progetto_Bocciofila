@@ -12,7 +12,42 @@ package com.mycompany.ferro_bocciofila;
 public class Ordinatore 
 {
     
+    public static void scambia(Tesserato v[],int posizione1,int posizione2)
+    {
+        Tesserato t;
+        t=v[posizione1];
+        v[posizione1]=v[posizione2];
+        v[posizione2]=t;
+    }
 
+    public static Tesserato[] selectionSortAlfabeticoSimpatizzante(Tesserato[] t)
+    {
+        int contatore=0;
+        
+        for(int i=0;i<t.length;i++)
+            if(t[i]!=null)
+                contatore++;
+        Tesserato[] ordinato=new Tesserato[contatore];
+
+
+
+        for(int i=0;i<ordinato.length;i++)
+           ordinato[i]=t[i];
+
+
+        for (int i=0;i<ordinato.length-1;i++)
+        {
+            for(int j=i+1;j<ordinato.length;j++)
+            {
+                
+                if(ordinato[j].getCognome().compareToIgnoreCase(ordinato[i].getCognome())<0)
+                    
+                    scambia(ordinato,i,j);
+            }
+        }
+        return ordinato;
+    }
+    
     //scambia arrey di stringhe
     public static void scambia(String v[],int posizione1, int posizione2)
     {
@@ -205,5 +240,6 @@ public class Ordinatore
         
        return ordinato;
     }
+    
     
 }

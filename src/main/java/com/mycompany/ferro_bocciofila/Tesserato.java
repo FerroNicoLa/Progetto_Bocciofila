@@ -5,21 +5,23 @@
  */
 package com.mycompany.ferro_bocciofila;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+
 
 /**
  *
  * @author nicol
  */
-public class Tesserato 
+public class Tesserato implements Serializable
 {
     
-    private String nome;
-    private String cognome;
-    private String codiceFiscale;
-    private String tipologia;
+    public String nome;
+    public String cognome;
+    public String codiceFiscale;
+    public String tipologia;
     LocalDate dataEmissione;
     
     
@@ -41,10 +43,21 @@ public class Tesserato
        cognome=t.cognome;
        codiceFiscale=t.codiceFiscale;
        tipologia=t.tipologia;
-       dataEmissione=t.dataEmissione;
+       
         
         
     }
+
+    public Tesserato()
+    {
+        this.nome=null;    
+        this.cognome=null;
+        this.codiceFiscale=null;
+        this.tipologia=null;
+        dataEmissione=null;
+        
+    }
+
     public String getNome() 
     {
         return nome;
@@ -106,13 +119,15 @@ public class Tesserato
     {
         return dataEmissione;
     }
+
     
-    public void setData(int giorno,int mese, int anno)
+    public void setDataEmissione(int giorno,int mese, int anno) 
     {
-        dataEmissione=dataEmissione.withYear(anno);
-        dataEmissione=dataEmissione.withMonth(mese);
-        dataEmissione=dataEmissione.withDayOfMonth(giorno);
+        this.dataEmissione = LocalDate.of(anno, mese, giorno);
+
     }
+    
+    
     
     @Override
     public String toString() {
