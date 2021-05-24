@@ -27,7 +27,7 @@ public class Main implements Serializable
     public static void main(String[] args)
     {
         Bocciofila b1=new Bocciofila();
-        String[] vociMenu=new String[8];
+        String[] vociMenu=new String[9];
         Scanner tastiera=new Scanner(System.in);
         int sceltaUtente=0;
         Tesserato tesserato;
@@ -44,10 +44,10 @@ public class Main implements Serializable
         vociMenu[2]="Elimina una tessera";
         vociMenu[3]="Visualizza Tesserati in base all' anno al mese e al giorno";
         vociMenu[4]="Dato nome e cognome, visualizza per quali anni è stato tesserato";
-        vociMenu[5]="Visualizza tutti i tesserati con tessera simpatizzante di un determinato anno in ordine alfabetico";
+        vociMenu[5]="Visualizza tutti i tesserati con tessera simpatizzante di un determinato anno,mese,giorno in ordine alfabetico";
         vociMenu[6]="Salva dati su file binario";
         vociMenu[7]="Esporta in formato CSV tutte le tessere";
-
+        vociMenu[8]="Visualizza tutti i Tesserati";
         
         try
         {
@@ -132,9 +132,10 @@ public class Main implements Serializable
 
          
                     b1.rimuoviTessere(posizione);
-
+                    b1.aggiornaPosizioneTesserati(posizione);
                     System.out.println("premi un pulsante per continuare");
                     tastiera.nextLine();
+                    
                     
                     System.out.println(b1.toString());
                     break;
@@ -202,7 +203,7 @@ public class Main implements Serializable
                     }
                     catch(IOException e1)
                     {
-                        System.out.println("Impossibile accedere al file. Le tessere non sono stati salvati");
+                        System.out.println("Impossibile accedere al file. Le tessere non sono state salvate");
                     }
                    /* catch (FileException e2)
                     {
@@ -219,7 +220,7 @@ public class Main implements Serializable
                     }
                     catch(IOException e1)
                     {
-                        System.out.println("Impossibile accedere al file. I libri non sono stati salvati");
+                        System.out.println("Impossibile accedere al file. Le tessere non sono stati salvati");
                     }
                     catch (FileException e2)
                     {
@@ -227,7 +228,11 @@ public class Main implements Serializable
                     }
                     break;
                 }
-                
+                case 8:
+                {
+                    System.out.println("I tesserati sono:");
+                    System.out.println(b1.toString());
+                }
                 
             }
                 

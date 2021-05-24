@@ -1,4 +1,8 @@
-porro;nicola;fona;simpatizzante;2020;1;1
+james;lebron;236macl;simpatizzante;2021;1;1
 
-finalga;alessandro;fff;socio;2020;1;1
+rodman;dennis;77chisa;socio;2021;3;3
+
+bryant;kobe;248lak;simpatizzante;2021;4;4
+
+magic;luka;77dall;socio;2023;4;1
 

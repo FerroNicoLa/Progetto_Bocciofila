@@ -12,9 +12,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
-
 /**
- *
+ *La classe rappresenta un softwere per registrare i tesserati alla Bocciofila
+ *La classe contiene tutti i metodi per effettuare operazioni sugli oggetti 
+ *di classe Bocciofila, contenuti in un arrey
+ *gli attributi sono:
+ * N_MAX_TESSERE: attributo statico, è una costante che rappresenta il numero massimo delle tessere che è 100
+ * tessere: arrey di oggetti di classe Revisione
+ * nTesserePresenti: variabile che tiene il conto degli elementi presenti nell'Arrey
  * @author nicol
  */
 public class Bocciofila implements Serializable
@@ -24,12 +29,25 @@ public class Bocciofila implements Serializable
     private int nTesserePresenti=0;
     
     
+    
+    /**
+     * Costruttore della classe Bocciofila
+     * Consente di istanziare una nuova bocciofila
+     * e formato da N_MAX_TESSERE
+     */
      public Bocciofila()
       {
           tessere=new Tesserato[N_MAX_TESSERE];
       }
      
      
+     /**
+      *Metodo aggungi tessera all'arrey
+      *Permette di aggungere una nuova tessera all'arrey di classe Bocciofila 
+      * @param tesserato oggetto che verrà aggunto all'arrey 
+      * @return 0 se l'aggunta è andata a buon fine
+      * @return -1 se l'arrey è gia pieno
+      */
      public int aggiungiTessera(Tesserato tesserato)
     {
         if (nTesserePresenti>N_MAX_TESSERE)
@@ -39,7 +57,12 @@ public class Bocciofila implements Serializable
         return 0;
     }
       
-      
+    /**
+     * Metodo che ci permette di eliminare una tessera dall'arrey in base alla posizione 
+     * @param posizione è la posizione dell oggetto all'interno dell'arrey
+     * @return -2 se la posizione è vuota
+     * @return -1 se la posizione non è valida
+     */  
       
        public int rimuoviTessere(int posizione)
     {
@@ -59,7 +82,14 @@ public class Bocciofila implements Serializable
         
            
     }
+      
        
+       
+    /**
+     * Metodo che ci permette di visualizzare i tesserati di un determinato anno,mese,giorno
+     * @param data data da inserire per ricercare il tesserato
+     * @return tessera restistuisce i/il tesserati/o
+     */
     public Tesserato[] tesseratiAnno(LocalDate data)
     {
         Tesserato[] tessera=new Tesserato[nTesserePresenti];
@@ -84,7 +114,10 @@ public class Bocciofila implements Serializable
     }
     
        
-       
+    /**
+     * Metodo che ci permette di visualizzare tutti gli elementi dell'arrey 
+     * @return s restituisce la stringa del tesserto 
+     */   
        
        public String toString()
     {
@@ -113,12 +146,26 @@ public class Bocciofila implements Serializable
             }
         }
     }
-      
+    
+    
+    /**
+     * Metodo getter dell'arrey di classe Bocciofila tessere
+     * Ci permette di visualizzare il numero massimo di tessere
+     * 
+     * @return N_MAX_TESSERE
+     */
     public int getN_MAX_TESSERE() 
     {
         return N_MAX_TESSERE;
     }
     
+    
+    /**
+     * Metodo che salva tutti i tesserati dell'arrey su file CSV
+     * @param nomeFile nome del file CSV su cui vogliamo salvare i tesserati
+     * @throws IOException
+     * @throws FileException 
+     */
     public void salvaTessere(String nomeFile) throws IOException, FileException
     {
         TextFile f1=new TextFile(nomeFile,'W');
@@ -133,8 +180,14 @@ public class Bocciofila implements Serializable
         }
         f1.close();
     }
-      
-    private void AggiornaPosizioneTesserati(int posizione)
+    
+    
+    /**
+     * Metodo che aggiorna la posizione degli oggetti nell'arrey dopo l'eliminazione di uno di questi
+     * sposta gli elementi dell'arrey in modo da non lasciare spazi 
+     * @param posizione  è la posizione dell oggetto all'interno dell'arrey
+     */
+    public void aggiornaPosizioneTesserati(int posizione)
     {
         for (int i=posizione;i<nTesserePresenti-1;i++)
         {
@@ -144,6 +197,13 @@ public class Bocciofila implements Serializable
         nTesserePresenti--;
     } 
     
+    
+    /**
+     * Metodo che ci permette di vidualizzare tutti i tesserati con tipologia simpatizzantre
+     * in ordine alfabetico in base all anno,mese,giorno 
+     * @param data data da inserire per ricercare il tesserato
+     * @return tessera restistuisce i/il tesserati/o 
+     */
     public Tesserato[] TipologiaOrdineAlfabetico (LocalDate data)
     {
         Tesserato[] tessera=new Tesserato[nTesserePresenti];
@@ -173,6 +233,12 @@ public class Bocciofila implements Serializable
         return tessera;
     }
     
+    
+    /**
+     *  Metodo che salva tutte le tessere su file binario 
+     * @param nomeFile  nome del file binario su cui vogliamo salvare i dati
+     * @throws IOException 
+     */
     public void salvaTessereBinario(String nomeFile) throws IOException
     {
         FileOutputStream f1=new FileOutputStream(nomeFile);
